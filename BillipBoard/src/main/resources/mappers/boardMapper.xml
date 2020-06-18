@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.billip.mapper.BoardMapper">
+
+<insert id="create"> <!-- DAO와 매핑을 위한 ID -->
+	insert into tbl_board(title, content, writer)
+	value(#{title}, #{content}, #{writer})
+</insert>
+
+<select id="read" resultType="com.billip.domain.BoardVO"> <!-- 데이터를 받아오기 위한 resultType명시 -->
+	select 
+		bno, title, content, writer, regdate, viewcnt
+	from
+		tbl_board
+	where bno = #{bno}
+</select>
+
+<update id="update">
+	update tbl_board set title = #{title}, content = #{content}
+	where bno = #{bno}
+</update>
+
+<delete id="delete">
+delete from tbl_board where bno = #{bno}
+</delete>
+
+<select id="listAll" resultType="com.billip.domain.BoardVO">
+	<![CDATA[ 
+	select
+		bno, title, content, writer, regdate, viewcnt
+	from
+		tbl_board
+	where bno > 0
+	order by bno desc, regdate desc
+	]]> <!-- SQL 내부에 연산자가 있을 경우 CDATA 사용 -->
+</select>
+
+</mapper>
