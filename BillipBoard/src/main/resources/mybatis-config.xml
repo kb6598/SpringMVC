@@ -4,5 +4,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- (Mybatis 설정파일임을 명시하기 위한 DTD 선언) -->
 <configuration>
-
+	<typeAliases>
+		<package name="com.billip.domain"/>
+	</typeAliases>
 </configuration>

@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.billip.domain.BoardVO;
+import com.billip.domain.Criteria;
+import com.billip.domain.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -48,6 +50,49 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> listAll() throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + ".listAll");
+	}
+	
+	@Override
+	public void updateViewcnt(Integer bno) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace + ".updateViewCnt", bno);
+		
+	}
+	
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		// TODO Auto-generated method stub
+		if(page <= 0)
+		{
+			page = 1;
+		}
+		page = (page - 1) * 10;
+		
+		return session.selectList(namespace + ".listPage", page);
+	}
+	
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+ ".listCriteria", cri);
+	}
+	
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".countPaging", cri);
+	}
+	
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".listSearch", cri);
+	}
+	
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 
 }

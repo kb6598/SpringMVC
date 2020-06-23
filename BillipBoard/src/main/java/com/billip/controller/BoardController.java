@@ -4,12 +4,16 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.billip.domain.BoardVO;
+import com.billip.domain.Criteria;
+import com.billip.domain.PageMaker;
+import com.billip.domain.SearchCriteria;
 import com.billip.service.BoardService;
 
 @Controller
@@ -34,7 +38,7 @@ public class BoardController {
 	public String registPOST(BoardVO board, RedirectAttributes rttr) throws Exception // 인자값으로 REDIRECT 사용
 	{
 		service.regist(board); // 글작성 서비스 호출
-		return "redirect:/listAll"; // 작성이 완료된 후 , 목록페이지로 리턴
+		return "redirect:/listPage"; // 작성이 완료된 후 , 목록페이지로 리턴
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET) // GET 방식으로 페이지 호출
@@ -53,14 +57,38 @@ public class BoardController {
 	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception 
 	{
 		service.modify(board); // 글수정 서비스 호출
-		return "redirect:/listAll"; // 수정이 완료된 후, 목록페이지로 리턴
+		return "redirect:/list"; // 수정이 완료된 후, 목록페이지로 리턴
 	}
 	
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	public String removePOST(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception
 	{
 		service.remove(bno);  // 글삭제 서비스 호출
-		return "redirect:/listAll";
+		return "redirect:/list";
 	}
 	
+	@RequestMapping(value="/listPage", method = RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception
+	{
+		model.addAttribute("list", service.listCriteria(cri)); // JSP에 계산된 페이징 출력
+		PageMaker pageMaker = new PageMaker(); // 객체생성
+		pageMaker.setCri(cri); //setCri 메소드 사용
+		pageMaker.setTotalCount(service.listCountCriteria(cri)); // 전체 게시글 갯수 카운트
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	@RequestMapping(value ="/list", method = RequestMethod.GET)
+	public void listPAge(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception
+	{
+		model.addAttribute("list", service.listSearchCriteria(cri)); // 전체목록에 검색페이징 기능
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.listSearchCount(cri)); // 전체목 록에 검색페이징 카운트
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+	}
 }

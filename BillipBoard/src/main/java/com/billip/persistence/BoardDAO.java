@@ -3,6 +3,8 @@ package com.billip.persistence;
 import java.util.List;
 
 import com.billip.domain.BoardVO;
+import com.billip.domain.Criteria;
+import com.billip.domain.SearchCriteria;
 
 public interface BoardDAO {
 	
@@ -15,5 +17,17 @@ public interface BoardDAO {
 	public void delete(Integer bno) throws Exception;
 	
 	public List<BoardVO> listAll() throws Exception;
+	
+	public void updateViewcnt(Integer bno) throws Exception;
+	
+	public List<BoardVO> listPage(int page) throws Exception;
+	
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	
+	public int countPaging(Criteria cri) throws Exception;
+	
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri) throws Exception;
 
 }

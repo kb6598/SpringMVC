@@ -29,7 +29,7 @@
 					<p align="center">조회수</p>
 				</td>
 			</tr>
-
+			
 			<c:forEach items="${list}" var="boardVO">
 				<tr>
 					<td>${boardVO.bno}</td>
@@ -40,10 +40,27 @@
 					<td><span class="badge bg-red">${boardVO.viewcnt}</span></td>
 				</tr>
 			</c:forEach>
-
 		</table>
 
-		<button type="submit">글쓰기</button>
+			<c:if test="${pageMaker.prev}">
+				<a href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+			</c:if>
+
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				<c:out value="${pageMaker.cri.page == idx?'':''}" />
+				<a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<a href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }"> » </a>
+			</c:if> <br>
+			
+			<button type="submit">글쓰기</button>
+
 	</body>
+
 </form>
+
+
+
 </html>

@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 delete from tbl_board where bno = #{bno}
 </delete>
 
-<select id="listAll" resultType="com.billip.domain.BoardVO">
+<select id="listAll" resultType="BoardVO">
 	<![CDATA[ 
 	select
 		bno, title, content, writer, regdate, viewcnt
@@ -38,4 +38,90 @@ delete from tbl_board where bno = #{bno}
 	]]> <!-- SQL 내부에 연산자가 있을 경우 CDATA 사용 -->
 </select>
 
+<update id="updateViewCnt">
+	update tbl_board
+	set viewcnt = viewcnt + 1
+	where bno = #{bno}
+</update>
+
+<select id="listPage" resultType="BoardVO"> <!-- 페이징 처리가 된 목록페이지 호출 -->
+	<![CDATA[
+	select
+		bno, title, content, writer, regdate, viewcnt
+	from
+		tbl_board
+	where bno > 0
+	order by bno desc, regdate desc
+	limit #{page}, 10
+	]]>
+</select>
+
+<select id="listCriteria" resultType="BoardVO"> <!-- 각 페이지 번호에 알맞은 데이터 호출 -->
+	<![CDATA[
+	select
+		bno, title, content, writer, regdate, viewcnt
+	from
+		tbl_board
+	where bno > 0
+	order by bno desc, regdate desc
+	limit #{pageStart}, #{perPageNum}
+	]]>
+</select>
+
+<select id="countPaging" resultType="int"> <!-- 전체 게시글 숫자 파악 -->
+	<![CDATA[
+	select count(bno)
+	from tbl_board
+	where bno > 0
+	]]>
+</select>
+
+<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%') OR content like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( content like CONCAT('%', #{keyword}, '%') OR writer like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%')
+				OR
+				content like CONCAT('%', #{keyword}, '%')
+				OR
+				writer like CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+<select id="listSearch" resultType="BoardVO">
+	<![CDATA[  
+	  select *
+	  from tbl_board 
+	  where bno > 0 
+	]]>
+	<include refid="search"></include>
+	<![CDATA[    
+	  order by bno desc
+	  limit #{pageStart}, #{perPageNum}
+	]]>
+</select>
+<select id="listSearchCount" resultType="int">
+	<![CDATA[  
+	  select count(bno) 
+	  from tbl_board 
+	  where bno > 0 
+	]]>
+	<include refid="search"></include>
+</select>
 </mapper>
