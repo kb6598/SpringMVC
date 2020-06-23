@@ -30,6 +30,12 @@
 				return false;
 			}
 		}));
+		if($("#dmForm").submit(function(){
+			if(!confirm("정말 탈퇴 할건가요?"))
+				{
+					return false;
+				}
+			}));
 	})
 </script>
 <title>마이페이지</title>
@@ -71,6 +77,17 @@
 					</p>
 					<p class="w3-center">
 						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
+					</p>
+				</form>
+				<br />
+				<form id="dmForm" action="../member/delete_member.do" method ="post">
+					<input type ="hidden" name="id" readonly value ="${member.id }">
+					<p>
+						<label>Password</label>
+						<input class="w3-input" type="password" name ="pw" required>
+					</p>
+					<p class="w3-center">
+						<button type="submit" id="deletememberBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원탈퇴</button>
 					</p>
 				</form>
 			</div>

@@ -67,4 +67,11 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlsession.update(namespace+ ".update_mypage", member);
 	}
+	
+	//회원 탈퇴
+	@Transactional
+	public int delete_member(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.delete(namespace + ".delete_member", member);
+	}
 }

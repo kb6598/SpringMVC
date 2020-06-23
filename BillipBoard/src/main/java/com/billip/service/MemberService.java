@@ -32,7 +32,10 @@ public interface MemberService {
 	public MemberVO update_mypage(MemberVO member) throws Exception;
 
 	//비밀번호 변경
-	MemberVO update_pw(MemberVO member, String old_pw, HttpServletResponse response) throws Exception;
+	public MemberVO update_pw(MemberVO member, String old_pw, HttpServletResponse response) throws Exception;
+	
+	// 회원 탈퇴
+	public boolean delete_member(MemberVO member, HttpServletResponse response) throws Exception;
 	
 
 }

@@ -26,5 +26,9 @@ public interface MemberDAO {
 	
 	//마이페이지
 	public int update_mypage(MemberVO member) throws Exception;
+	
+	// 회원 탈퇴
+	public int delete_member(MemberVO member) throws Exception;
+	
 
 }

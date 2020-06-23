@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -131,5 +132,16 @@ public class MemberController {
 		session.setAttribute("member", service.update_pw(member, old_pw, response));
 		rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
 		return "redirect:/member/mypage.do";
+	}
+	
+	//회원탈퇴
+	@RequestMapping(value="/delete_member.do", method = RequestMethod.POST)
+	public String delete_member(@ModelAttribute MemberVO member, HttpSession session, HttpServletResponse response ) throws Exception
+	{
+		if(service.delete_member(member, response))
+		{
+			session.invalidate();
+		}
+		return "redirect:/";
 	}
 }

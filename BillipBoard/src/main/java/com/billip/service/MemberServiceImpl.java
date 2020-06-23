@@ -382,4 +382,25 @@ public class MemberServiceImpl implements MemberService {
 			return manager.login(member.getId());
 		}
 	}
+	
+	// 회원 탈퇴
+	@Override
+	public boolean delete_member(MemberVO member, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(manager.delete_member(member) != 1) 
+		{
+			out.println("<script>");
+			out.println("alert('회원탈퇴 실패');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return false;
+		}
+		else 
+		{
+			return true;
+		}
+	}
 }
