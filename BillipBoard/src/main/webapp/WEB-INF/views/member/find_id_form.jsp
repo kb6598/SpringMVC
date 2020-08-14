@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>아이디 찾기</title>
 </head>
+<style>
+</style>
 <body>
 <div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">

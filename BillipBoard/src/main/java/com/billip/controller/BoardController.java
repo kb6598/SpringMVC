@@ -46,7 +46,7 @@ public class BoardController {
 	public String registPOST(BoardVO board, RedirectAttributes rttr) throws Exception // 인자값으로 REDIRECT 사용
 	{
 		service.regist(board); // 글작성 서비스 호출
-		return "redirect:/listPage"; // 작성이 완료된 후 , 목록페이지로 리턴
+		return "redirect:/list"; // 작성이 완료된 후 , 목록페이지로 리턴
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET) // GET 방식으로 페이지 호출

@@ -5,49 +5,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <meta charset="UTF-8">
 <title>게시판 목록</title>
 </head>
+<style>
+body {
+	background-image: url("/resources/imgs/background2.jpg");
+	background-repeat: repeat-x;
+	background-size: cover;
+}
+
+table
+{
+	background-color: white;
+	opacity: 0.95;
+}
+
+</style>
 <body>
-	<select name="searchType">
-
-		<option value="n"
-			<c:out value="${cri.searchType == null?'selected':''}"/>>
-
-			---</option>
-
-		<option value="t"
-			<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목</option>
-
-		<option value="c"
-			<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
-
-		<option value="w"
-			<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>작성자</option>
-
-		<option value="tc"
-			<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-
-			제목+ 내용</option>
-
-		<option value="cw"
-			<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용
-			+ 작성자</option>
-
-		<option value="tcw"
-			<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-
-			제목 + 내용 + 작성자</option>
-
-	</select>
-
-	<input type="text" name='keyword' id="keywordInput"
-		value='${cri.keyword }'>
-
-	<button type="button" id='searchBtn'>검색</button>
-
-
-	<table border="1" width="880">
+	<div class = "container">
+	<center><h1><span class="label label-default">게시판</span></h1></center>
+	<br />
+	<table class ="table table-hover">
 
 		<tr>
 
@@ -104,7 +87,11 @@
 		</c:forEach>
 
 	</table>
-
+	<hr />
+	<button id="newBtn" class="btn btn-default pull-right">글쓰기</button>
+	
+	<div class="text-center">
+		<ul class="pagination">
 	<c:if test="${pageMaker.prev}">
 
 		<a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">«</a>
@@ -113,22 +100,66 @@
 
 	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
 		var="idx">
-
-		<c:out value="${pageMaker.cri.page == idx?'':''}" />
+		<li
+		<c:out value="${pageMaker.cri.page == idx?'':''}" />>
 
 		<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
-
+		</li>
 	</c:forEach>
 
 	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 
 		<a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }"> » </a>
 	</c:if>
+		</ul>
+	</div>
 	<br>
+	
+	<div class="search row">
+		<div class="col-xs-2 col-sm-2">
+			<select name="searchType" class="form-control">
 
-	<button id="newBtn">글쓰기</button>
+				<option value="n"
+					<c:out value="${cri.searchType == null?'selected':''}"/>>
 
+					---</option>
 
+				<option value="t"
+					<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목</option>
+
+				<option value="c"
+					<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
+
+				<option value="w"
+					<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>작성자</option>
+
+				<option value="tc"
+					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+
+					제목+ 내용</option>
+
+				<option value="cw"
+					<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용
+					+ 작성자</option>
+
+				<option value="tcw"
+					<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
+
+					제목 + 내용 + 작성자</option>
+
+			</select> 
+			</div>
+			
+			<div class="col-xs-10 col-sm-10">
+				<div class="input-group">
+					<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' class="form-control">
+					<span class="input-group-btn">
+					<button type="button" id='searchBtn' class="btn btn-default">검색</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	
 	<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
@@ -154,6 +185,6 @@
 				});
 			});
 	</script>
-
+	</div>
 </body>
 </html>
