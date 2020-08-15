@@ -68,11 +68,10 @@ body {
 							</p>
 							<p class="w3-center">
 								<button type="submit"
-									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Log
-									in</button>
+									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">로그인</button>
 								<button type="button"
 									class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round"
-									onclick="history.go(-1)">Cancel</button>
+									onclick="history.go(-1)">취소</button>
 							</p>
 						</form>
 					</div>

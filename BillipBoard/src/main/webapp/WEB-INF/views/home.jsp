@@ -38,9 +38,12 @@ body {
 	background-color: transparent;
 	border: 0px;
 	color: white;
-	font-size: 40px;
+	font-size: 3em;
 	text-align: center;
 	text-decoration: none;
+  	font-weight: bold;
+	
+	
 }
 
 .btn2 {
@@ -51,18 +54,20 @@ body {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 30px;
+	font-size: 2em;
 	margin: 4px 2px;
 	cursor: pointer;
+	font-weight: bold;
 }
 
 a {
 	background-color: transparent;
 	border: 0px;
 	color: white;
-	font-size: 40px;
+	font-size: 3em;
 	text-align: center;
 	text-decoration: none;
+	font-weight: bold;
 }
 </style>
 <form action="list" method="get">
