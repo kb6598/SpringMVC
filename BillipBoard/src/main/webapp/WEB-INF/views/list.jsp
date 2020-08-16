@@ -88,7 +88,9 @@ table
 
 	</table>
 	<hr />
+	<c:if test="${ member != null }">
 	<button id="newBtn" class="btn btn-default pull-right">글쓰기</button>
+	</c:if>
 	
 	<div class="text-center">
 		<ul class="pagination">
