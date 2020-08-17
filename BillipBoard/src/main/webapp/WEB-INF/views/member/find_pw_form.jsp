@@ -56,12 +56,12 @@ body {
 					</div>
 					<div>
 						<p>
-							<label>아이디</label> <input class="w3-input" type="text" id="id"
-								name="id" required>
+							<label>아이디</label> 
+							<input class="w3-input" type="text" id="id" name="id" required>
 						</p>
 						<p>
-							<label>이메일</label> <input class="w3-input" type="text"
-								id="email" name="email" required>
+							<label>이메일</label> 
+							<input class="w3-input" type="text" id="email" name="email" required>
 						</p>
 						<p class="w3-center">
 							<button type="button" id=findBtn

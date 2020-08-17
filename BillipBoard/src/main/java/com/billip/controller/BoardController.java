@@ -51,7 +51,8 @@ public class BoardController {
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET) // GET 방식으로 페이지 호출
 	public String read(@RequestParam("bno")int bno,
-						@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception // 인자값은 파라미터 값으로 기본키인 글번호를 기준으로 Model을 사용하여 불러옴
+						@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception 
+					// 인자값은 파라미터 값으로 기본키인 글번호를 기준으로 Model을 사용하여 불러옴
 	{
 		 model.addAttribute(service.read(bno)); // read 서비스 호출
 		 
@@ -82,16 +83,16 @@ public class BoardController {
 		return "redirect:/list";
 	}
 	
-	@RequestMapping(value="/listPage", method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception
-	{
-		model.addAttribute("list", service.listCriteria(cri)); // JSP에 계산된 페이징 출력
-		PageMaker pageMaker = new PageMaker(); // 객체생성
-		pageMaker.setCri(cri); //setCri 메소드 사용
-		pageMaker.setTotalCount(service.listCountCriteria(cri)); // 전체 게시글 갯수 카운트
-		
-		model.addAttribute("pageMaker", pageMaker);
-	}
+//	@RequestMapping(value="/listPage", method = RequestMethod.GET)
+//	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception
+//	{
+//		model.addAttribute("list", service.listCriteria(cri)); // JSP에 계산된 페이징 출력
+//		PageMaker pageMaker = new PageMaker(); // 객체생성
+//		pageMaker.setCri(cri); //setCri 메소드 사용
+//		pageMaker.setTotalCount(service.listCountCriteria(cri)); // 전체 게시글 갯수 카운트
+//		
+//		model.addAttribute("pageMaker", pageMaker);
+//	}
 	
 	@RequestMapping(value ="/list", method = RequestMethod.GET)
 	public void listPAge(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception

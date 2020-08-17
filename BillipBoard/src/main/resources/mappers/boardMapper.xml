@@ -104,6 +104,7 @@ delete from tbl_board where bno = #{bno}
 			</if>
 		</if>
 	</sql>
+	
 <select id="listSearch" resultType="BoardVO">
 	<![CDATA[  
 	  select *
@@ -116,6 +117,7 @@ delete from tbl_board where bno = #{bno}
 	  limit #{pageStart}, #{perPageNum}
 	]]>
 </select>
+
 <select id="listSearchCount" resultType="int">
 	<![CDATA[  
 	  select count(bno) 

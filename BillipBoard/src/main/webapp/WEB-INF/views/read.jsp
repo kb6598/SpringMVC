@@ -252,17 +252,14 @@ label {
 						<li>
 							<p>
 								작성자 : ${replyList.writer}<br /> 작성 날짜 :
-								<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-									value="${replyList.regdate}" />
+								<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${replyList.regdate}" />
 							</p>
 
 							<p>${replyList.content}</p>
 							<div>
 								<c:if test="${ member.id == replyList.writer }">
-									<button type="button" class="replyUpdateBtn"
-										data-rno="${replyList.rno}" >수정</button>
-									<button type="button" class="replyDeleteBtn"
-										data-rno="${replyList.rno}" >삭제</button>
+									<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}" >수정</button>
+									<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}" >삭제</button>
 								</c:if>
 							</div>
 						</li>

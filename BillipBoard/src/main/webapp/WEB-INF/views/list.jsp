@@ -31,61 +31,42 @@ table
 	<center><h1><span class="label label-default">게시판</span></h1></center>
 	<br />
 	<table class ="table table-hover">
-
 		<tr>
-
 			<td width="77">
-
 				<p align="center">글번호</p>
-
 			</td>
-
 			<td width="327">
-
 				<p align="center">제목</p>
-
 			</td>
-
 			<td width="197">
-
 				<p align="center">작성자</p>
-
 			</td>
-
 			<td width="155">
-
 				<p align="center">작성일</p>
-
 			</td>
-
 			<td width="90">
-
 				<p align="center">조회수</p>
-
 			</td>
-
 		</tr>
-
 		<c:forEach items="${list}" var="boardVO">
 			<tr>
-				<td>${boardVO.bno}</td>
-
-				<td><a
-					href='/read${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
-
-						${boardVO.title} </a></td>
-
-				<td>${boardVO.writer}</td>
-
-				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-						value="${boardVO.regdate}" /></td>
-
-				<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>
-
+				<td>
+					${boardVO.bno}
+				</td>
+				<td>
+					<a href='/read${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'> ${boardVO.title} </a>
+				</td>
+				<td>
+					${boardVO.writer}
+				</td>
+				<td>
+					<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate}" />
+				</td>
+				<td>
+					<span class="badge bg-red">${boardVO.viewcnt} </span>
+				</td>
 			</tr>
-
 		</c:forEach>
-
 	</table>
 	<hr />
 	<c:if test="${ member != null }">
@@ -120,35 +101,27 @@ table
 	<div class="search row">
 		<div class="col-xs-2 col-sm-2">
 			<select name="searchType" class="form-control">
-
 				<option value="n"
 					<c:out value="${cri.searchType == null?'selected':''}"/>>
-
 					---</option>
-
 				<option value="t"
-					<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목</option>
-
+					<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목
+				</option>
 				<option value="c"
-					<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
-
+					<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용
+				</option>
 				<option value="w"
-					<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>작성자</option>
-
+					<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>작성자
+				</option>
 				<option value="tc"
-					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-
-					제목+ 내용</option>
-
+					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>제목+ 내용
+				</option>
 				<option value="cw"
-					<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용
-					+ 작성자</option>
-
+					<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용 + 작성자
+				</option>
 				<option value="tcw"
-					<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-
-					제목 + 내용 + 작성자</option>
-
+					<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>제목 + 내용 + 작성자
+				</option>
 			</select> 
 			</div>
 			
@@ -169,10 +142,7 @@ table
 
 		$(document).ready(
 			function() {
-				$('#searchBtn').on(
-
-					"click",
-
+				$('#searchBtn').on("click",
 					function(event) {
 						str = "list"
 						+ '${pageMaker.makeQuery(1)}'
